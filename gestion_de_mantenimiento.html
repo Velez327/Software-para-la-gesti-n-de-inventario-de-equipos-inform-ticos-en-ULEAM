@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gestión de Mantenimiento - Inventario ULEAM</title>
+    <link rel="stylesheet" href="mantenimiento.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <a class="navbar-brand" href="#">Inventario ULEAM</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Inicio</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Gestión de Equipos</a>
+                </li>
+                <li class="nav-item active">
+                    <a class="nav-link" href="#">Gestión de Mantenimiento</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Gestión de Usuarios</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="container">
+        <h1 class="page-title">Gestión de Mantenimiento de Equipos</h1>
+
+        <div class="text-right mb-3">
+            <button class="btn btn-primary" data-toggle="modal" data-target="#mantenimientoModal">Añadir Nuevo Mantenimiento</button>
+        </div>
+
+        <table class="table table-bordered table-striped">
+            <thead class="thead-dark">
+                <tr>
+                    <th>ID</th>
+                    <th>Equipo</th>
+                    <th>Tipo de Mantenimiento</th>
+                    <th>Fecha Inicio</th>
+                    <th>Fecha Finalización</th>
+                    <th>Descripción</th>
+                    <th>Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+
+                <tr>
+                    <td>001</td>
+                    <td>PC - ASUS ROG</td>
+                    <td>Preventivo</td>
+                    <td>01/10/2024</td>
+                    <td>08/10/2024</td>
+                    <td>Pendiente</td>
+                    <td>
+                        <button class="btn btn-warning btn-sm">Editar</button>
+                        <button class="btn btn-danger btn-sm">Eliminar</button>
+                    </td>
+                </tr>
+
+            </tbody>
+        </table>
+    </div>
+
+    <div class="modal fade" id="mantenimientoModal" tabindex="-1" role="dialog" aria-labelledby="mantenimientoModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="mantenimientoModalLabel">Añadir Mantenimiento</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form>
+                        <div class="form-group">
+                            <label for="equipoId">Equipo</label>
+                            <input type="text" class="form-control" id="equipoId" placeholder="ID del Equipo">
+                            <small id="equipoError" class="form-text text-danger" style="display:none;">Ingrese un ID de equipo válido.</small>
+                        </div>
+                        <div class="form-group">
+                            <label for="tipoMantenimiento">Tipo de Mantenimiento</label>
+                            <select class="form-control" id="tipoMantenimiento">
+                                <option value="">Seleccione un tipo de mantenimiento</option>
+                                <option value="Preventivo">Preventivo</option>
+                                <option value="Correctivo">Correctivo</option>
+                            </select>
+                            <small id="tipoMantenimientoError" class="form-text text-danger" style="display:none;">Seleccione un tipo de mantenimiento.</small>
+                        </div>
+                        <div class="form-group">
+                            <label for="fechaInicio">Fecha de Inicio</label>
+                            <input type="date" class="form-control" id="fechaInicio">
+                            <small id="fechaInicioError" class="form-text text-danger" style="display:none;">Ingrese una fecha de inicio válida.</small>
+                        </div>
+                        <div class="form-group">
+                            <label for="fechaFin">Fecha de Finalización</label>
+                            <input type="date" class="form-control" id="fechaFin">
+                            <small id="fechaFinError" class="form-text text-danger" style="display:none;">Ingrese una fecha de finalización válida.</small>
+                        </div>
+                        <div class="form-group">
+                            <label for="descripcion">Descripción del Mantenimiento</label>
+                            <textarea class="form-control" id="descripcion" rows="3"></textarea>
+                            <small id="descripcionError" class="form-text text-danger" style="display:none;">La descripción es obligatoria.</small>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                    <button type="button" class="btn btn-primary" id="saveMaintenanceButton">Guardar</button>
+                </div>
+            </div>
+        </div>
+    </div> 
+
+    <footer class="bg-dark text-white text-center p-3 mt-4">
+        <p>© 2024 ULEAM - Sistema de Gestión de Inventario</p>
+    </footer>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+    <!--Añadir Nuevo Mantenimiento Validacion-->  
+    <script>
+        function validarIdEquipo(equipoId) {
+            const regex = /^[A-Za-z0-9]+$/;
+            return regex.test(equipoId);
+        }
+
+        function validarTipoMantenimiento(tipo) {
+            return tipo !== ""; // Asegura que una opción esté seleccionada
+        }
+
+        function validarFechas(fechaInicio, fechaFin) {
+            const inicio = new Date(fechaInicio);
+            const fin = new Date(fechaFin);
+            return inicio <= fin; // La fecha de inicio debe ser anterior o igual a la fecha de finalización
+        }
+
+        function validarDescripcion(descripcion) {
+            return descripcion.trim() !== ""; 
+        }
+
+        document.getElementById('saveMaintenanceButton').addEventListener('click', function () {
+            const equipo = document.getElementById('equipoId').value;
+            const tipoMantenimiento = document.getElementById('tipoMantenimiento').value;
+            const fechaInicio = document.getElementById('fechaInicio').value;
+            const fechaFin = document.getElementById('fechaFin').value;
+            const descripcion = document.getElementById('descripcion').value;
+
+            const equipmentError = document.getElementById('equipoError');
+            const maintenanceTypeError = document.getElementById('tipoMantenimientoError');
+            const startDateError = document.getElementById('fechaInicioError');
+            const endDateError = document.getElementById('fechaFinError');
+            const descriptionError = document.getElementById('descripcionError');
+
+            let isValid = true;
+
+            if (!validarIdEquipo(equipo)) {
+                equipoError.style.display = 'block';
+                isValid = false;
+            } else {
+                equipoError.style.display = 'none';
+            }
+
+            if (!validarTipoMantenimiento(tipoMantenimiento)) {
+                tipoMantenimientoError.style.display = 'block';
+                isValid = false;
+            } else {
+                tipoMantenimientoError.style.display = 'none';
+            }
+   
+            if (!validarFechas(fechaInicio, fechaFin)) {
+                fechaInicioError.style.display = 'block';
+                fechaFinError.style.display = 'block';
+                isValid = false;
+            } else {
+                fechaInicioError.style.display = 'none';
+                fechaFinError.style.display = 'none';
+            }
+
+            if (!validarDescripcion(descripcion)) {
+                descriptionError.style.display = 'block';
+                isValid = false;
+            } else {
+                descriptionError.style.display = 'none';
+            }
+
+            // Si todos los campos son válidos
+            if (isValid) {
+                alert("Mantenimiento válido");
+            }
+        });
+    </script>
+</body>
+</html>

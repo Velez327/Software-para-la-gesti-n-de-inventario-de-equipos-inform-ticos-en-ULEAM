@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gestión de Equipos - Inventario ULEAM</title> 
+    <link rel="stylesheet" href="inventario.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+    
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <a class="navbar-brand" href="#">Inventario ULEAM</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Inicio</a>
+                </li>
+                <li class="nav-item active">
+                    <a class="nav-link" href="#">Gestión de Equipos</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Gestión de Mantenimiento</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Gestión de Usuarios</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="container">
+        <h1 class="page-title">Gestión de Equipos Informáticos</h1>
+
+        <div class="text-right mb-3">
+            <button class="btn btn-primary" data-toggle="modal" data-target="#addEquipoModal">Añadir Nuevo Equipo</button>
+            <button class="btn btn-danger" data-toggle="modal" data-target="#bajaEquipoModal">Dar de Baja Equipo</button>
+        </div>
+
+        <table class="table table-bordered table-striped">
+            <thead class="thead-dark">
+                <tr>
+                    <th>ID</th>
+                    <th>Tipo de Equipo</th>
+                    <th>Marca</th>
+                    <th>Modelo</th>
+                    <th>Número de Serie</th>
+                    <th>Ubicación</th>
+                    <th>Asignado a:</th>
+                    <th>Estado</th>
+                    <th>Fecha Compra</th>
+                    <th>Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>001</td>
+                    <td>PC</td>
+                    <td>ASUS</td>
+                    <td>ROG</td>
+                    <td>19855XPZ</td>
+                    <td>Laboratorio Informática</td>
+                    <td>Charly Duarte</td>
+                    <td>En Mantenimiento</td>
+                    <td>10/08/2022</td>
+                    <td>
+                        <button class="btn btn-warning btn-sm">Editar</button>
+                        <button class="btn btn-danger btn-sm">Eliminar</button>
+                    </td>
+                </tr>
+            </tbody>
+            <tbody>
+                <tr>
+                    <td>002</td>
+                    <td>Laptop</td>
+                    <td>ASUS</td>
+                    <td>TUF</td>
+                    <td>00157DSH</td>
+                    <td>Recursos Humanos</td>
+                    <td>Byron Castañeda</td>
+                    <td>Activo</td>
+                    <td>10/10/2022</td>
+                    <td>
+                        <button class="btn btn-warning btn-sm">Editar</button>
+                        <button class="btn btn-danger btn-sm">Eliminar</button>
+                    </td>
+                </tr>
+            </tbody>
+            <tbody>
+                <tr>
+                    <td>003</td>
+                    <td>Laptop</td>
+                    <td>ASUS</td>
+                    <td>VIVOBOOK</td>
+                    <td>55569LAB</td>
+                    <td>Recursos Humanos</td>
+                    <td>Yuleisi Moreira</td>
+                    <td>Activo</td>
+                    <td>10/08/2022</td> 
+                    <td>
+                        <button class="btn btn-warning btn-sm">Editar</button>
+                        <button class="btn btn-danger btn-sm">Eliminar</button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div class="modal fade" id="addEquipoModal" tabindex="-1" role="dialog" aria-labelledby="addEquipoModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="addEquipoModalLabel">Añadir Nuevo Equipo</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                <form>
+                    <div class="form-group">
+                        <label for="tipoEquipo">Tipo de Equipo</label>
+                        <input type="text" class="form-control" id="tipoEquipo" placeholder="Ingrese tipo de equipo">
+                        <small id="tipoError" class="form-text text-danger" style="display:none;">El tipo de equipo solo debe contener letras y espacios.</small>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="marca">Marca</label>
+                        <input type="text" class="form-control" id="marca" placeholder="Ingrese marca">
+                        <small id="marcaError" class="form-text text-danger" style="display:none;">La marca solo debe contener letras y espacios.</small>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="modelo">Modelo</label>
+                        <input type="text" class="form-control" id="modelo" placeholder="Ingrese modelo">
+                        <small id="modeloError" class="form-text text-danger" style="display:none;">El modelo solo debe contener letras y espacios.</small>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="Numserie">Número de Serie</label>
+                        <input type="text" class="form-control" id="Numserie" placeholder="Ingrese número de serie">
+                        <small id="serieError" class="form-text text-danger" style="display:none;">El número de serie debe ser alfanumérico.</small>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="ubicacion">Ubicación</label>
+                        <input type="text" class="form-control" id="ubicacion" placeholder="Ingrese ubicación">
+                        <small id="ubicacionError" class="form-text text-danger" style="display:none;">La ubicación solo debe contener letras y espacios.</small>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="asignacion">Asignado a:</label>
+                        <input type="text" class="form-control" id="asignacion" placeholder="Ingrese a quien está asignado">
+                        <small id="asignacionError" class="form-text text-danger" style="display:none;">El nombre solo debe contener letras y espacios.</small>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="estado">Estado</label>
+                        <select class="form-control" id="equipoEstado">
+                            <option value="">Seleccione un estado</option>
+                            <option value="Operativo">Operativo</option>
+                            <option value="En Mantenimiento">En Mantenimiento</option>
+                            <option value="Dado de Baja">Dado de Baja</option>
+                        </select>
+                        <small id="estadoError" class="form-text text-danger" style="display:none;">Seleccione un estado para el equipo.</small>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="purchaseDate">Fecha Compra</label>
+                        <input type="date" class="form-control" id="purchaseDate">
+                        <small id="dateError" class="form-text text-danger" style="display:none;">Ingrese una fecha válida.</small>
+                    </div>
+                </form>
+  
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                    <button type="button" class="btn btn-primary" id="saveEquipmentButton">Guardar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="bajaEquipoModal" tabindex="-1" role="dialog" aria-labelledby="bajaEquipoModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="bajaEquipoModalLabel">Dar de Baja Equipo</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form>
+                        <div class="form-group">
+                            <label for="EquipoId">ID del Equipo</label>
+                            <input type="text" class="form-control" id="EquipoId" placeholder="Ingrese el ID del equipo">
+                            <small id="idError" class="form-text text-danger" style="display:none;">El ID debe ser un valor numérico.</small>
+                        </div>
+                        <div class="form-group">
+                            <label for="bajaDescripcion">Motivo de la Baja</label>
+                            <textarea class="form-control" id="bajaDescripcion" rows="3"></textarea>
+                            <small id="bajaDescripcionError" class="form-text text-danger" style="display:none;">El motivo de la baja es obligatorio.</small>
+                        </div>
+                        <div class="form-group">
+                            <label for="fechaBaja">Fecha de Baja</label>
+                            <input type="date" class="form-control" id="fechaBaja">
+                            <small id="fechaBajaError" class="form-text text-danger" style="display:none;">Ingrese una fecha válida.</small>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                    <button type="button" class="btn btn-primary" id="saveBajaButton">Guardar Baja</button>
+                </div>
+            </div>
+        </div>
+    </div>>
+
+    <footer class="bg-dark text-white text-center p-3 mt-4">
+        <p>© 2024 ULEAM - Sistema de Gestión de Inventario</p>
+    </footer>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+    <!--Añadir Nuevo Equipo Validacion -->
+    <script>
+        function validarTexto(texto) {
+            const regex = /^[A-Za-z\s]+$/;
+            return regex.test(texto);
+        }
+
+        function validarNumeroSerie(numeroSerie) {
+            const regex = /^[A-Za-z0-9]+$/;
+            return regex.test(numeroSerie);
+        }
+
+        function validarEstado(estado) {
+            return estado !== ""; // Asegura que una opción esté seleccionada
+        }
+
+        function validarFecha(fecha) {
+            const fechaActual = new Date();
+            const fechaSeleccionada = new Date(fecha);
+            return fechaSeleccionada <= fechaActual; // Verifica que la fecha no sea futura
+        }
+
+        document.getElementById('saveEquipmentButton').addEventListener('click', function () {
+            const tipoEquipo = document.getElementById('tipoEquipo').value;
+            const marca = document.getElementById('marca').value;
+            const modelo = document.getElementById('modelo').value;
+            const numeroSerie = document.getElementById('Numserie').value;
+            const ubicacion = document.getElementById('ubicacion').value;
+            const asignadoA = document.getElementById('asignacion').value;
+            const estado = document.getElementById('equipoEstado').value;
+            const fechaCompra = document.getElementById('purchaseDate').value;
+
+            const typeError = document.getElementById('tipoError');
+            const brandError = document.getElementById('marcaError');
+            const modelError = document.getElementById('modeloError');
+            const serialError = document.getElementById('serieError');
+            const locationError = document.getElementById('ubicacionError');
+            const assignedError = document.getElementById('asignacionError');
+            const stateError = document.getElementById('estadoError');
+            const dateError = document.getElementById('dateError');
+
+            let isValid = true;
+
+            // Validar campos de texto
+            if (!validarTexto(tipoEquipo)) {
+                tipoError.style.display = 'block';
+                isValid = false;
+            } else {
+                tipoError.style.display = 'none';
+            }
+
+            if (!validarTexto(marca)) {
+                marcaError.style.display = 'block';
+                isValid = false;
+            } else {
+                marcaError.style.display = 'none';
+            }
+
+            if (!validarTexto(modelo)) {
+                modeloError.style.display = 'block';
+                isValid = false;
+            } else {
+                modeloError.style.display = 'none';
+            }
+
+            if (!validarNumeroSerie(numeroSerie)) {
+                serieError.style.display = 'block';
+                isValid = false;
+            } else {
+                serieError.style.display = 'none'; 
+            }
+
+            if (!validarTexto(ubicacion)) {
+                ubicacionError.style.display = 'block';
+                isValid = false;
+            } else {
+                ubicacionError.style.display = 'none';
+            }
+
+            if (!validarTexto(asignadoA)) {
+                asignacionError.style.display = 'block';
+                isValid = false;
+            } else {
+                asignacionError.style.display = 'none';
+            }
+
+            if (!validarEstado(estado)) {
+                estadoError.style.display = 'block';
+                isValid = false;
+            } else {
+                estadoError.style.display = 'none';
+            }
+
+            if (!validarFecha(fechaCompra)) {
+                dateError.style.display = 'block';
+                isValid = false;
+            } else {
+                dateError.style.display = 'none';
+            }
+
+            // Si todos los campos son válidos
+            if (isValid) {
+                alert("Equipo válido.");
+            }
+        });
+    </script>
+
+    <!--Dar de Baja Equipo Validacion--> 
+    <script>
+        function validarDescripcionBaja(descripcion) {
+            return descripcion.trim() !== "";
+        }
+
+        function validarFechaBaja(fecha) {
+            return fecha !== ""; // Solo validamos que haya una fecha seleccionada
+        }
+
+        document.getElementById('saveBajaButton').addEventListener('click', function () {
+            const equipoId = document.getElementById('EquipoId').value;
+            const descripcionBaja = document.getElementById('bajaDescripcion').value;
+            const fechaBaja = document.getElementById('fechaBaja').value;
+
+            const idError = document.getElementById('idError');
+            const bajaDescriptionError = document.getElementById('bajaDescripcionError');
+            const bajaDateError = document.getElementById('fechaBajaError');
+
+            let isValid = true;
+
+            if (isNaN(equipoId) || equipoId.trim() === '') {
+                idError.style.display = 'block';
+                isValid = false;
+            } else {
+                idError.style.display = 'none'; 
+            }
+
+            if (!validarDescripcionBaja(descripcionBaja)) {
+                bajaDescripcionError.style.display = 'block';
+                isValid = false;
+            } else {
+                bajaDescripcionError.style.display = 'none';
+            }
+
+            if (!validarFechaBaja(fechaBaja)) {
+                fechaBajaError.style.display = 'block';
+                isValid = false;
+            } else {
+                fechaBajaError.style.display = 'none';
+            }
+
+            // Si todos los campos son válidos 
+            if (isValid) {
+                alert("Baja de equipo válida");
+            }
+        });
+    </script>
+    
+</body>
+</html>
